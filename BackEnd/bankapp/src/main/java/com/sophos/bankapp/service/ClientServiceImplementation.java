@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sophos.bankapp.entity.client;
+import com.sophos.bankapp.entity.Client;
 import com.sophos.bankapp.repository.ClientRepository;
 
 @Service
@@ -16,19 +16,19 @@ public class ClientServiceImplementation implements ClientService {
     ClientRepository clientRepository;
 
     @Override
-    public client createClient(client client) {
+    public Client createClient(Client client) {
         
         return clientRepository.save(client);
     }
 
     @Override
-    public List<client> getAllClients() {
+    public List<Client> getAllClients() {
         
         return clientRepository.findAll();
     }
 
     @Override
-    public Optional<client> getClientById(int id) {
+    public Optional<Client> getClientById(int id) {
         
         return clientRepository.findById(id);
     }

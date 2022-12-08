@@ -1,5 +1,7 @@
 package com.sophos.bankapp.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +12,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="clients")
 
-public class client {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,14 +21,14 @@ public class client {
     private String name;
     private String lastName;
     private String email;
-    private String birthDate;
-    private String creationDate;
+    private Date birthDate;
+    private Date creationDate;
     private String creationUser;
-    private String updateDate;
+    private Date updateDate;
     private String updateUser;
 
     
-    public client() {
+    public Client() {
     }
 
 
@@ -90,22 +92,22 @@ public class client {
     }
 
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
 
-    public String getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -120,12 +122,12 @@ public class client {
     }
 
 
-    public String getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
 
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 
@@ -138,5 +140,6 @@ public class client {
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
+    
     
 }

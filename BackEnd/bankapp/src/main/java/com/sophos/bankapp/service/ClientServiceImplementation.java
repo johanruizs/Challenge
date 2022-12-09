@@ -17,25 +17,21 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public Client createClient(Client client) {
-        
         return clientRepository.save(client);
     }
 
     @Override
     public List<Client> getAllClients() {
-        
         return clientRepository.findAll();
     }
 
     @Override
     public Optional<Client> getClientById(int id) {
-        
         return clientRepository.findById(id);
     }
 
     @Override
     public boolean deleteClientById(int id) {
-    
         return getClientById(id).map(client -> {
             clientRepository.deleteById(id);
             return true;

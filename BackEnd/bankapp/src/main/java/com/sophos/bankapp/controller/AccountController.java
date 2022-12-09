@@ -13,44 +13,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sophos.bankapp.entity.Client;
-import com.sophos.bankapp.service.ClientService;
+import com.sophos.bankapp.entity.Account;
+import com.sophos.bankapp.service.AccountService;;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/accounts")
 
-
-public class ClientController {
+public class AccountController {
 
     @Autowired
-    ClientService clientService;
-
+    AccountService accountService;
 
     @GetMapping
-    public ResponseEntity<List<Client>> getClients(){
+    public ResponseEntity<List<Account>> getAccounts(){
         
-        return new ResponseEntity<>(clientService.getAllClients(), HttpStatus.OK);
+        return new ResponseEntity<>(accountService.getAllAccounts(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Client> createClient(@RequestBody Client client){
+    public ResponseEntity<Account> createAccount(@RequestBody Account account){
 
-        return new ResponseEntity<>(clientService.createClient(client), HttpStatus.CREATED);
+        return new ResponseEntity<>(accountService.createAccount(account), HttpStatus.CREATED);
 
     }
 
     
     @GetMapping("/{id}")
-    public ResponseEntity<Client> getClientById(@PathVariable("id") int id){
+    public ResponseEntity<Account> getAccountById(@PathVariable("id") int id){
         
-        return clientService.getClientById(id)
-                .map(client -> new ResponseEntity<>(client, HttpStatus.OK))
+        return accountService.getAccountById(id)
+                .map(account -> new ResponseEntity<>(account, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteClientById(@PathVariable("id") int id){
-        if (clientService.deleteClientById(id)){
+    public ResponseEntity<Boolean> deleteAccountById(@PathVariable("id") int id){
+        if (accountService.deleteAccountById(id)){
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -58,4 +56,3 @@ public class ClientController {
     }
     
 }
-

@@ -17,6 +17,9 @@ public class AccountServiceImplementation implements AccountService {
 
     @Override
     public Account createAccount(Account account) {
+        AccountGenerator accountGenerator = new AccountGenerator();
+        int cuentaBancaria = accountGenerator.accountGenerator(account.getAccountType());
+        account.setAccountNumber(cuentaBancaria);
         return accountRepository.save(account);
     }
 

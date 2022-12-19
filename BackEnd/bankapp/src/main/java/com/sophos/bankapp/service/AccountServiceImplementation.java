@@ -9,17 +9,21 @@ import org.springframework.stereotype.Service;
 import com.sophos.bankapp.entity.Account;
 import com.sophos.bankapp.repository.AccountRepository;
 
+
 @Service
 public class AccountServiceImplementation implements AccountService {
 
     @Autowired
     AccountRepository accountRepository;
 
+    // @Autowired
+    // AccountGenerator accountGenerator;
+
     @Override
     public Account createAccount(Account account) {
-        AccountGenerator accountGenerator = new AccountGenerator();
-        int cuentaBancaria = accountGenerator.accountGenerator(account.getAccountType());
-        account.setAccountNumber(cuentaBancaria);
+        AccountGenerator accountGenerator = new AccountGenerator(); // por el autowired AccountGenerator
+        String newAccountNumber = accountGenerator.accountGenerator(account.getAccountType());
+        account.setAccountNumber(newAccountNumber);
         return accountRepository.save(account);
     }
 

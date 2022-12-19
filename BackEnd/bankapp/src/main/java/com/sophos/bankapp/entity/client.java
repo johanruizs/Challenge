@@ -17,7 +17,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String typeId;
-    private Long numberId;
+    private String numberId;
     private String name;
     private String lastName;
     private String email;
@@ -52,12 +52,12 @@ public class Client {
     }
 
 
-    public Long getNumberId() {
+    public String getNumberId() {
         return numberId;
     }
 
 
-    public void setNumberId(Long numberId) {
+    public void setNumberId(String numberId) {
         this.numberId = numberId;
     }
 

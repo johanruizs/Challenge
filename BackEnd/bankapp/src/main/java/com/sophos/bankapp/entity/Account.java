@@ -16,8 +16,9 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private Long numberId; //Vincular con el numberId de cliente 
     private String accountType;
-    private Number accountNumber;
+    private String accountNumber;
     private String accountStatus;
     private Number Balance;
     private Number availableBalance;
@@ -38,6 +39,14 @@ public class Account {
         this.id = id;
     }
 
+    public Long getNumberId() {
+        return numberId;
+    }
+
+    public void setNumberId(Long numberId) {
+        this.numberId = numberId;
+    }
+
     public String getAccountType() {
         return accountType;
     }
@@ -46,11 +55,11 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public Number getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(Number accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 

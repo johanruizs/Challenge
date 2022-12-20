@@ -30,6 +30,17 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAllAccounts(), HttpStatus.OK);
     }
 
+    // @PostMapping
+    // public ResponseEntity<Account> createAccount(@PathVariable("numberId")String numberId, @RequestBody Account account){
+
+    //     if(accountService.createAccount(numberId, account) != null){
+    //         return new ResponseEntity<>(HttpStatus.CREATED);
+    //     } else {
+    //         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    //     }
+    //     // return new ResponseEntity<>(accountService.createAccount(numberId, account), HttpStatus.CREATED);
+    // }
+
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account account){
 
@@ -37,7 +48,6 @@ public class AccountController {
 
     }
 
-    
     @GetMapping("/{id}")
     public ResponseEntity<Account> getAccountById(@PathVariable("id") int id){
         

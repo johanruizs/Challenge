@@ -1,11 +1,14 @@
 package com.sophos.bankapp.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,11 +24,13 @@ public class Client {
     private String name;
     private String lastName;
     private String email;
-    private Date birthDate;
-    private Date creationDate;
+    private LocalDate birthDate;
+    private LocalDate creationDate;
     private String creationUser;
-    private Date updateDate;
+    private LocalDate updateDate;
     private String updateUser;
+    // @OneToMany(mappedBy = "numberId", cascade = CascadeType.ALL)
+    // private List<Account> accounts;
 
     
     public Client() {
@@ -92,22 +97,22 @@ public class Client {
     }
 
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -122,12 +127,12 @@ public class Client {
     }
 
 
-    public Date getUpdateDate() {
+    public LocalDate getUpdateDate() {
         return updateDate;
     }
 
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
 
@@ -140,6 +145,15 @@ public class Client {
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
-    
-    
+
+
+    // public List<Account> getAccounts() {
+    //     return accounts;
+    // }
+
+
+    // public void setAccounts(List<Account> accounts) {
+    //     this.accounts = accounts;
+    // }
+  
 }

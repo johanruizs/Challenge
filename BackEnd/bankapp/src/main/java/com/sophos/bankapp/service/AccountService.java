@@ -7,6 +7,7 @@ import com.sophos.bankapp.entity.Account;
 
 public interface AccountService {
 
+    // public Account createAccount(String numberId, Account account);
     public Account createAccount(Account account);
     public List<Account> getAllAccounts();
     public Optional<Account> getAccountById(int id);

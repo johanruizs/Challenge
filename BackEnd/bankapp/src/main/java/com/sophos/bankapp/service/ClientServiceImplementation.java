@@ -2,7 +2,6 @@ package com.sophos.bankapp.service;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,11 +23,10 @@ public class ClientServiceImplementation implements ClientService {
     public Client createClient(Client client) {
 
         AgeCalculator ageCalculator = new AgeCalculator();
-        LocalDate birthDateConverted = ageCalculator.convertToLocalDateViaInstant(client.getBirthDate());
-        LocalDate currentDateConverted = ageCalculator.convertToLocalDateViaInstant(new Date());
-        int age = ageCalculator.calculateAge(birthDateConverted, currentDateConverted);
-        if (age>=18){
-            client.setCreationDate(new Date());
+        int age = ageCalculator.calculateAge(client.getBirthDate(), LocalDate.now());
+        Client clientExist = clientRepository.findByNumberId(client.getNumberId());
+        if (age>=18 && clientExist == null) {
+            client.setCreationDate(LocalDate.now());
             client.setCreationUser("admin");
             client.setUpdateUser("admin");
             return clientRepository.save(client);
@@ -44,15 +42,47 @@ public class ClientServiceImplementation implements ClientService {
     @Override
     public Optional<Client> getClientById(int id) {
         return clientRepository.findById(id);
-    }
+    }                                                           
 
-    @Override
+    // @Override
+    //  public Optional<Client> getClientByNumberId(String numberId) {
+    //      return clientRepository.getByNumberId(numberId);
+    // }
+
+    @Override                                                      
     public boolean deleteClientById(int id) {
         return getClientById(id).map(client -> {
             clientRepository.deleteById(id);
             return true;
         }).orElse(false);
     }
+
+    // @Override
+    // public boolean deleteClientBynumberId(String numberId) {
+    //     Optional <Client> clientExist = clientRepository.getByNumberId(numberId);
+    //     if(clientExist != null) {
+    //         clientRepository.deleteById(clientExist.get().getId());
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    //     // return getClientByNumberId(numberId).map(client -> {
+    //     //     clientRepository.deleteById(client.getId());
+    //     //     return true;
+    //     // }).orElse(false);
+    // }
+
+
+    // // Delete by numberId
+    // @Override
+    // public boolean deleteClientByNumberId(String numberId) {
+    //     Client clientToDelete = clientRepository.findByNumberId(numberId);
+    //     return getClientById(clientToDelete.getId()).map(client -> {
+    //         clientRepository.deleteById(clientToDelete.getId());
+    //         return true;
+    //     }).orElse(false);
+    // }
+
 
     @Override
     public Client saveClientInfo(Client client) {
@@ -71,21 +101,13 @@ public class ClientServiceImplementation implements ClientService {
                 Field field = ReflectionUtils.findField(Client.class, key);
                 field.setAccessible(true);
                 ReflectionUtils.setField(field, clientToUpdate.get(), value);
-                clientToUpdate.get().setUpdateDate(new Date());
+                clientToUpdate.get().setUpdateDate(LocalDate.now());
             });
-            // AgeCalculator ageCalculator = new AgeCalculator();
-            // LocalDate birthDateUpdated = ageCalculator.convertToLocalDateViaInstant(clientToUpdate.get().getBirthDate());
-            // LocalDate currentDateConverted = ageCalculator.convertToLocalDateViaInstant(new Date());
-            // int age = ageCalculator.calculateAge(birthDateUpdated, currentDateConverted);
-            // if (age>=18){
-            //     return clientRepository.save(clientToUpdate.get());
-            // } 
-
+            
             return clientRepository.save(clientToUpdate.get());
         }
         return null;
 
     }
-
 
 }

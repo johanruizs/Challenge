@@ -76,6 +76,17 @@ public class ClientController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
+    // // Delete by numberId
+    // @DeleteMapping("/{numberId}")
+    // public ResponseEntity<Boolean> deleteClientByNumberId(@PathVariable("numberId") String numberId){
+    //     if (clientService.deleteClientByNumberId(numberId)){
+    //         return new ResponseEntity<>(HttpStatus.OK);
+    //     } else {
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
+    // }
     
 }
 

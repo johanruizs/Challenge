@@ -8,5 +8,6 @@ import com.sophos.bankapp.entity.Account;
 @Repository
 
 public interface AccountRepository extends JpaRepository<Account, Integer>{
+
     
 }

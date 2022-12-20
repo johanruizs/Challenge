@@ -11,8 +11,12 @@ public interface ClientService {
     public Client createClient(Client client);
     public List<Client> getAllClients();
     public Optional<Client> getClientById(int id);
+    // public Optional<Client> getClientByNumberId(String numberId); // Esta es la que deberia borrar 
     public boolean deleteClientById(int id);
+    // public boolean deleteClientByNumberId(String numberId); // esta es la qye deberia borrar 
     public Client saveClientInfo(Client client);
     public Client updateClientInfoByFields(int id, Map<String, Object> fields);
+
+    // public boolean deleteClientByNumberId(String numberId);
     
 }

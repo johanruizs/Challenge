@@ -2,10 +2,12 @@ package com.sophos.bankapp.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,7 +18,8 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Long numberId; //Vincular con el numberId de cliente 
+    // @OneToOne(mappedBy = "numberId", cascade = CascadeType.ALL)
+    // private Client client; 
     private String accountType;
     private String accountNumber;
     private String accountStatus;
@@ -37,14 +40,6 @@ public class Account {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Long getNumberId() {
-        return numberId;
-    }
-
-    public void setNumberId(Long numberId) {
-        this.numberId = numberId;
     }
 
     public String getAccountType() {
@@ -126,7 +121,13 @@ public class Account {
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
-    
 
-   
+    // public Client getClient() {
+    //     return client;
+    // }
+
+    // public void setClient(Client client) {
+    //     this.client = client;
+    // }
+     
 }

@@ -59,7 +59,7 @@ public class ClientController {
     public ResponseEntity<Client> modifyClientInfo(@PathVariable int id, @RequestBody Map<String, Object> fields) {
 
         Client clientUpdated = clientService.updateClientInfoByFields(id, fields);
-        // return new ResponseEntity<>(clientUpdated, HttpStatus.OK);
+        
         if (clientUpdated != null){
             return new ResponseEntity<>(clientUpdated, HttpStatus.OK);
         } else {

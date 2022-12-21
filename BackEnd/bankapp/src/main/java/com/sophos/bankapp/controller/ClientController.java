@@ -38,7 +38,6 @@ public class ClientController {
     @PostMapping
     public ResponseEntity<Client> createClient(@RequestBody Client client){
 
-        // return new ResponseEntity<>(clientService.createClient(client), HttpStatus.CREATED);
         if (clientService.createClient(client) != null){
             return new ResponseEntity<>(client, HttpStatus.CREATED);
         } else {

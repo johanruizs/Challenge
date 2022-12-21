@@ -9,5 +9,6 @@ import com.sophos.bankapp.entity.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Integer>{
 
-    
+    Account findByAccountNumber (String accountNumber);
+ 
 }

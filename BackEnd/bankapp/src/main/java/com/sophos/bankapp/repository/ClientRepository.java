@@ -11,6 +11,5 @@ import com.sophos.bankapp.entity.Client;
 public interface ClientRepository extends JpaRepository <Client, Integer> {
 
     Client findByNumberId(String numberId);
-    // Optional <Client> getByNumberId(String numberId);
-        
+            
 }

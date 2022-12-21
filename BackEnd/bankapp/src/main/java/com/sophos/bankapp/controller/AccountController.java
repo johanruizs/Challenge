@@ -44,7 +44,11 @@ public class AccountController {
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account account){
 
-        return new ResponseEntity<>(accountService.createAccount(account), HttpStatus.CREATED);
+        if (accountService.createAccount(account) != null){
+            return new ResponseEntity<>(account, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
 
     }
 

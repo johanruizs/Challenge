@@ -1,13 +1,14 @@
 package com.sophos.bankapp.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import jakarta.persistence.CascadeType;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,17 +19,19 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     // @OneToOne(mappedBy = "numberId", cascade = CascadeType.ALL)
     // private Client client; 
+    
     private String accountType;
     private String accountNumber;
     private String accountStatus;
-    private Number Balance;
+    private Number balance;
     private Number availableBalance;
-    private Boolean TaxFree;
-    private Date creationDate;
+    private Boolean taxFree;
+    private LocalDate creationDate;
     private String creationUser;
-    private Date updateDate;
+    private LocalDate updateDate;
     private String updateUser;
     
     public Account() {
@@ -67,11 +70,11 @@ public class Account {
     }
 
     public Number getBalance() {
-        return Balance;
+        return balance;
     }
 
     public void setBalance(Number balance) {
-        Balance = balance;
+        this.balance = balance;
     }
 
     public Number getAvailableBalance() {
@@ -83,18 +86,18 @@ public class Account {
     }
 
     public Boolean getTaxFree() {
-        return TaxFree;
+        return taxFree;
     }
 
     public void setTaxFree(Boolean taxFree) {
-        TaxFree = taxFree;
+        this.taxFree = taxFree;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -106,11 +109,11 @@ public class Account {
         this.creationUser = creationUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDate getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
 

@@ -1,6 +1,6 @@
 package com.sophos.bankapp.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,12 +17,12 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String accountNumber; // Vincular con el accounNumber de Account
-    private Date transactionDate;
+    private LocalDate transactionDate;
     private String transactionType;
     private String description;
     private Number transactionValue;
     private String movementType;
-    private Number Balance; // De la clase account
+    private Number balance; // De la clase account
     private Number availableBalance; // De la clase Account 
 
 
@@ -50,12 +50,12 @@ public class Transaction {
     }
 
 
-    public Date getTransactionDate() {
+    public LocalDate getTransactionDate() {
         return transactionDate;
     }
 
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -101,12 +101,12 @@ public class Transaction {
 
 
     public Number getBalance() {
-        return Balance;
+        return balance;
     }
 
 
     public void setBalance(Number balance) {
-        Balance = balance;
+        this.balance = balance;
     }
 
 

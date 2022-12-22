@@ -38,22 +38,23 @@ public class AccountServiceImplementation implements AccountService {
     @Override
     public Account createAccount(Account account) {
 
-        Account accountExist = accountRepository.findByAccountNumber(account.getAccountNumber());
-        if (
-            (account.getAccountType().equalsIgnoreCase("Saving") || account.getAccountType().equalsIgnoreCase("Checking")) 
-            && 
-            accountExist == null
-            ) {
+        if (account.getAccountType().equalsIgnoreCase("Saving") || account.getAccountType().equalsIgnoreCase("Checking")) {
+
                 AccountGenerator accountGenerator = new AccountGenerator();
                 String newAccountNumber = accountGenerator.accountGenerator(account.getAccountType());
-                account.setAccountNumber(newAccountNumber);
-                account.setCreationDate(LocalDate.now());
-                account.setCreationUser("admin");
-                account.setUpdateUser("admin");
-                if (account.getAccountType().equalsIgnoreCase("Saving")){
-                    account.setAccountStatus("Active");
+
+                Account accountExist = accountRepository.findByAccountNumber(newAccountNumber);
+
+                if (accountExist == null){
+                    account.setAccountNumber(newAccountNumber);
+                    account.setCreationDate(LocalDate.now());
+                    account.setCreationUser("admin");
+                    account.setUpdateUser("admin");
+                    if (account.getAccountType().equalsIgnoreCase("Saving")){
+                        account.setAccountStatus("Active");
+                    }
+                    return accountRepository.save(account);
                 }
-                return accountRepository.save(account);
         } 
         return null;
     }

@@ -2,13 +2,15 @@ package com.sophos.bankapp.entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,9 +22,11 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    // @OneToOne(mappedBy = "numberId", cascade = CascadeType.ALL)
-    // private Client client; 
-    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    private Client accountHolder; 
+
     private String accountType;
     private String accountNumber;
     private String accountStatus;
@@ -125,12 +129,12 @@ public class Account {
         this.updateUser = updateUser;
     }
 
-    // public Client getClient() {
-    //     return client;
-    // }
+    public Client getAccountHolder() {
+        return accountHolder;
+    }
 
-    // public void setClient(Client client) {
-    //     this.client = client;
-    // }
-     
+    public void setAccountHolder(Client accountHolder) {
+        this.accountHolder = accountHolder;
+    }
+
 }

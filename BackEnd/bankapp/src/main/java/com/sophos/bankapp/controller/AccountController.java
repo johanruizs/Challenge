@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sophos.bankapp.entity.Account;
+import com.sophos.bankapp.entity.Client;
+import com.sophos.bankapp.repository.AccountRepository;
+import com.sophos.bankapp.repository.ClientRepository;
 import com.sophos.bankapp.service.AccountService;;
 
 @RestController
@@ -23,6 +27,12 @@ public class AccountController {
 
     @Autowired
     AccountService accountService;
+
+    @Autowired 
+    ClientRepository clientRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
 
     @GetMapping
     public ResponseEntity<List<Account>> getAccounts(){
@@ -67,6 +77,17 @@ public class AccountController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PutMapping("/{accountId}/accountHolder/{clientId}")
+    Account assignClientToAccount(
+            @PathVariable int accountId,
+            @PathVariable int clientId
+    ) {
+        Account account = accountRepository.findById(accountId).get();
+        Client client = clientRepository.findById(clientId).get();
+        account.setAccountHolder(client);
+        return accountRepository.save(account);
     }
     
 }

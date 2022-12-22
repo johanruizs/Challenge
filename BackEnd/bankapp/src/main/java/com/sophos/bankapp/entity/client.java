@@ -1,14 +1,15 @@
 package com.sophos.bankapp.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,8 +30,10 @@ public class Client {
     private String creationUser;
     private LocalDate updateDate;
     private String updateUser;
-    // @OneToMany(mappedBy = "numberId", cascade = CascadeType.ALL)
-    // private List<Account> accounts;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "accountHolder")
+    private List<Account> accountsList;
 
     
     public Client() {
@@ -147,13 +150,13 @@ public class Client {
     }
 
 
-    // public List<Account> getAccounts() {
-    //     return accounts;
-    // }
+    public List<Account> getAccounts() {
+        return accountsList;
+    }
 
 
-    // public void setAccounts(List<Account> accounts) {
-    //     this.accounts = accounts;
-    // }
+    public void setAccounts(List<Account> accountList) {
+        this.accountsList = accountList;
+    }
   
 }

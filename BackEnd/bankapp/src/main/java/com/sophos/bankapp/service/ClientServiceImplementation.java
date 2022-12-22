@@ -44,11 +44,7 @@ public class ClientServiceImplementation implements ClientService {
         return clientRepository.findById(id);
     }                                                           
 
-    // @Override
-    //  public Optional<Client> getClientByNumberId(String numberId) {
-    //      return clientRepository.getByNumberId(numberId);
-    // }
-
+   
     @Override                                                      
     public boolean deleteClientById(int id) {
         return getClientById(id).map(client -> {
@@ -56,32 +52,6 @@ public class ClientServiceImplementation implements ClientService {
             return true;
         }).orElse(false);
     }
-
-    // @Override
-    // public boolean deleteClientBynumberId(String numberId) {
-    //     Optional <Client> clientExist = clientRepository.getByNumberId(numberId);
-    //     if(clientExist != null) {
-    //         clientRepository.deleteById(clientExist.get().getId());
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    //     // return getClientByNumberId(numberId).map(client -> {
-    //     //     clientRepository.deleteById(client.getId());
-    //     //     return true;
-    //     // }).orElse(false);
-    // }
-
-
-    // // Delete by numberId
-    // @Override
-    // public boolean deleteClientByNumberId(String numberId) {
-    //     Client clientToDelete = clientRepository.findByNumberId(numberId);
-    //     return getClientById(clientToDelete.getId()).map(client -> {
-    //         clientRepository.deleteById(clientToDelete.getId());
-    //         return true;
-    //     }).orElse(false);
-    // }
 
 
     @Override

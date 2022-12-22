@@ -42,8 +42,7 @@ public class AccountServiceImplementation implements AccountService {
 
                 AccountGenerator accountGenerator = new AccountGenerator();
                 String newAccountNumber = accountGenerator.accountGenerator(account.getAccountType());
-
-                Account accountExist = accountRepository.findByAccountNumber(newAccountNumber);
+                Account accountExist = accountRepository.findByAccountNumber(newAccountNumber); // Do while !!
 
                 if (accountExist == null){
                     account.setAccountNumber(newAccountNumber);
@@ -53,6 +52,7 @@ public class AccountServiceImplementation implements AccountService {
                     if (account.getAccountType().equalsIgnoreCase("Saving")){
                         account.setAccountStatus("Active");
                     }
+                    
                     return accountRepository.save(account);
                 }
         } 

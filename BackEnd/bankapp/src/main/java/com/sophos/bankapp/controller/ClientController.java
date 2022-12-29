@@ -29,13 +29,13 @@ public class ClientController {
     ClientService clientService;
 
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Client>> getClients(){
         
         return new ResponseEntity<>(clientService.getAllClients(), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Client> createClient(@RequestBody Client client){
 
         if (clientService.createClient(client) != null){
@@ -46,7 +46,7 @@ public class ClientController {
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable("id") int id){
         
         return clientService.getClientById(id)
@@ -55,7 +55,7 @@ public class ClientController {
     }
 
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<Client> modifyClientInfo(@PathVariable int id, @RequestBody Map<String, Object> fields) {
 
         Client clientUpdated = clientService.updateClientInfoByFields(id, fields);
@@ -67,7 +67,7 @@ public class ClientController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> deleteClientById(@PathVariable("id") int id){
         if (clientService.deleteClientById(id)){
             return new ResponseEntity<>(HttpStatus.OK);

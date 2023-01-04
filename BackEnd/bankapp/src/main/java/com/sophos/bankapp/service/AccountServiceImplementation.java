@@ -12,7 +12,7 @@ import com.sophos.bankapp.entity.Client;
 import com.sophos.bankapp.repository.AccountRepository;
 import com.sophos.bankapp.repository.ClientRepository;
 
-import jakarta.persistence.Id;
+
 
 
 @Service

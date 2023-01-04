@@ -40,21 +40,11 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAllAccounts(), HttpStatus.OK);
     }
 
-    // @PostMapping
-    // public ResponseEntity<Account> createAccount(@PathVariable("numberId")String numberId, @RequestBody Account account){
+    
+    @PostMapping("/{clientId}")
+    public ResponseEntity<Account> createAccount(@PathVariable int clientId, @RequestBody Account account){
 
-    //     if(accountService.createAccount(numberId, account) != null){
-    //         return new ResponseEntity<>(HttpStatus.CREATED);
-    //     } else {
-    //         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-    //     }
-    //     // return new ResponseEntity<>(accountService.createAccount(numberId, account), HttpStatus.CREATED);
-    // }
-
-    @PostMapping
-    public ResponseEntity<Account> createAccount(@RequestBody Account account){
-
-        if (accountService.createAccount(account) != null){
+        if (accountService.createAccount(clientId, account) != null){
             return new ResponseEntity<>(account, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -79,7 +69,18 @@ public class AccountController {
         }
     }
 
-    @PutMapping("/{accountId}/accountHolder/{clientId}")
+    @PutMapping("/status/{id}")
+    public ResponseEntity<Account> activeInactiveAccount(@PathVariable("id") int id, @RequestBody Account account){
+		
+        if (accountService.activeInactiveAccount(id, account) != null){
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);	
+        }    
+
+	}
+
+    @PutMapping("/{accountId}/accountHolder/{clientId}") // esto lo meti en el create
     Account assignClientToAccount(
             @PathVariable int accountId,
             @PathVariable int clientId

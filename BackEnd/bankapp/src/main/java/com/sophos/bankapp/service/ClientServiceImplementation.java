@@ -67,6 +67,7 @@ public class ClientServiceImplementation implements ClientService {
 
         if (clientToUpdate.isPresent()){
 
+            clientToUpdate.toString();
             fields.forEach((key, value) -> {
                 Field field = ReflectionUtils.findField(Client.class, key);
                 field.setAccessible(true);
@@ -78,6 +79,54 @@ public class ClientServiceImplementation implements ClientService {
         }
         return null;
 
+    }
+
+    @Override
+    public Client editClient(int id, Client client){
+
+        Client existingClient = clientRepository.findById(id).get();
+
+        existingClient.setId(id);
+		
+		if (client.getTypeId() != null) {
+			existingClient.setTypeId(client.getTypeId());
+
+		} 
+		
+		if (client.getNumberId() != null) {
+			existingClient.setNumberId(client.getNumberId());
+
+		} 
+		
+		if (client.getName() != null) {
+			existingClient.setName(client.getName());
+
+		} 
+	
+		if (client.getLastName() != null) {
+			existingClient.setLastName(client.getLastName());
+
+		}
+		
+		if (client.getEmail() != null) {
+			existingClient.setEmail(client.getEmail());
+			
+		}	
+			
+		if (client.getBirthDate() != null) {
+			existingClient.setBirthDate(client.getBirthDate());
+			
+		}	
+				
+		existingClient.setUpdateDate(LocalDate.now());
+
+        AgeCalculator ageCalculator = new AgeCalculator();
+        int age = ageCalculator.calculateAge(existingClient.getBirthDate(), LocalDate.now());
+        if (age>=18) {
+            return clientRepository.save(existingClient);
+        } 
+        return null;
+		
     }
 
 }

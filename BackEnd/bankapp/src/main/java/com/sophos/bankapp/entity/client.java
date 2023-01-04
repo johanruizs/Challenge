@@ -30,7 +30,6 @@ public class Client {
     private String creationUser;
     private LocalDate updateDate;
     private String updateUser;
-    
     @JsonIgnore
     @OneToMany(mappedBy = "accountHolder")
     private List<Account> accountsList;

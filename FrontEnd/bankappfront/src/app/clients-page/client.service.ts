@@ -15,14 +15,14 @@ export class ClientService {
         return this.http.get<Client[]>(`${this.apiServerUrl}/clients/all`);
     }
 
+    public getClientById(id: String): Observable<Client>{
+        return this.http.get<Client>(`${this.apiServerUrl}/clients/find/${id}`)
+    }
+
     public addClient(client: Client): Observable<Client> {
         return this.http.post<Client>(`${this.apiServerUrl}/clients/add`, client);
     }
-
-    // public updateClient(client: Client): Observable<Client> {
-    //     return this.http.patch<Client>(`${this.apiServerUrl}/clients/update/${client.id}`, client);
-    // }
-
+ 
     public editClient(client: Client): Observable<Client> {
         return this.http.put<Client>(`${this.apiServerUrl}/clients/edit/${client.id}`, client);
     }

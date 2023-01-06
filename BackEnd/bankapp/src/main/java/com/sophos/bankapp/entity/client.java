@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -32,6 +33,7 @@ public class Client {
     private String updateUser;
     @JsonIgnore
     @OneToMany(mappedBy = "accountHolder")
+    // @JoinColumn(name = "account_id", referencedColumnName = "id")
     private List<Account> accountsList;
 
     

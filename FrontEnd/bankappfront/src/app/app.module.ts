@@ -4,20 +4,23 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClientService } from './client.service';
 import { FormsModule } from '@angular/forms';
 import { ClientAccountsComponent } from './client-accounts/client-accounts.component';
+import { ClientsPageComponent } from './clients-page/clients-page.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClientAccountsComponent
+    ClientAccountsComponent,
+    ClientsPageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

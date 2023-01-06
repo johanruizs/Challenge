@@ -1,3 +1,5 @@
+import { Account } from "../client-accounts/Account";
+
 export interface Client {
     id: number;
     typeId: String;
@@ -10,5 +12,5 @@ export interface Client {
     creationUser: String;
     updateDate: Date;
     updateUser: String;
-
+    accounts: Account[];
 }

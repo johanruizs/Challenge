@@ -47,6 +47,8 @@ public class ClientServiceImplementation implements ClientService {
    
     @Override                                                      
     public boolean deleteClientById(int id) {
+        
+
         return getClientById(id).map(client -> {
             clientRepository.deleteById(id);
             return true;

@@ -1,1 +1,87 @@
-<p>client-accounts works!</p>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: indigo;">
+    <a class="navbar-brand" style="color:white;">bank app</a>
+    <button class="navbar-toggler" style="background-color: rgb(188, 138, 223);" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+           <li class="nav-item active">
+              <a class="nav-link border border-primary rounded p-1 bg-primary text-white" (click)="onOpenModal('add')">Create Account<span class="sr-only">(current)</span></a>
+           </li>
+        </ul>
+        <a routerLink="/clients" >
+            <button class="nav-link border rounded p-1 px-4 text-dark" style="background-color: rgb(188, 138, 223);">Back</button>
+        </a>
+     </div>
+</nav>
+<div class="content-box" id="main-container">
+    <div class="content-box border rounded p-1">
+        <h2>{{client.name}} {{client.lastName}}</h2>
+        <p>{{client.typeId}} {{client.numberId}}</p>
+    </div>
+    <!-- Accounts card-->
+    <div class="card mb-4">
+        <div class="card-header bg-success bg-gradient font-weight-bold">Accounts</div>
+        <div class="card-body p-0">
+            <!-- Accounts table-->
+            <div class="table-responsive table-billing-history">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="border-gray-200" scope="col">Account Type</th>
+                            <th class="border-gray-200" scope="col">Account Number</th>
+                            <th class="border-gray-200" scope="col">Balance</th>
+                            <th class="border-gray-200" scope="col">Available Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor= "let account of client.accounts">
+                            <td>{{account.accountType}}</td>
+                            <td>{{account.accountNumber}}</td>
+                            <td>{{account.balance}}</td>
+                            <td>{{account.availableBalance}}</td>
+                            <td><a class="btn btn-danger tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a></td>
+                        </tr>    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Account Modal -->
+<div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="addAccountModalLabel">Create Account</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form #addForm="ngForm" (ngSubmit)="onAddAccount(addForm)">
+                <div class="form-group">
+                    <label for="accountType">Account Type</label>
+                    <div class="check-boxes">
+                      <input type="radio" ngModel name="accountType" value="Saving" class="boxes-margin" id="accountType" required>Saving
+                      <input type="radio" ngModel name="accountType" value="Checking" class="boxes-margin" id="accountType" required>Checking
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="taxFree">Tax Free</label>
+                    <div class="check-boxes">
+                      <input type="radio" ngModel name="taxFree" [value]= "true" class="boxes-margin" id="taxFree" required>Yes
+                      <input type="radio" ngModel name="taxFree" [value]="false" class="boxes-margin" id="taxFree" required>No
+                    </div>
+                </div>
+                <div class="modal-footer">
+                   <button type="button" id="add-account-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Create</button>
+                </div>
+            </form>
+         </div>
+      </div>
+    </div>
+  </div>

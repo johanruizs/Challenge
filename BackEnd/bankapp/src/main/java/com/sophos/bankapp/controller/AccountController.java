@@ -70,9 +70,9 @@ public class AccountController {
     }
 
     @PutMapping("/status/{id}")
-    public ResponseEntity<Account> activeInactiveAccount(@PathVariable("id") int id, @RequestBody Account account){
+    public ResponseEntity<Account> activeInactiveAccount(@PathVariable("id") int id){
 		
-        if (accountService.activeInactiveAccount(id, account) != null){
+        if (accountService.activeInactiveAccount(id) != null){
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);	

@@ -73,18 +73,18 @@ public class AccountServiceImplementation implements AccountService {
     }
 
     @Override
-    public Account activeInactiveAccount(int id, Account account){
+    public Account activeInactiveAccount(int id){
 
         Account accountToUpdateStatus = accountRepository.findById(id).get();
 
-        if(accountToUpdateStatus.getAccountStatus().equalsIgnoreCase("Active")){
-            accountToUpdateStatus.setAccountStatus("Inactive");
+        if(accountToUpdateStatus.getAccountStatus() == null){
+            accountToUpdateStatus.setAccountStatus("Active");
             return accountRepository.save(accountToUpdateStatus);
         } else if (accountToUpdateStatus.getAccountStatus().equalsIgnoreCase("Inactive")) {
             accountToUpdateStatus.setAccountStatus("Active");
             return accountRepository.save(accountToUpdateStatus);
-        } else if (accountToUpdateStatus.getAccountStatus() == null){
-            accountToUpdateStatus.setAccountStatus("Active");
+        } else if (accountToUpdateStatus.getAccountStatus().equalsIgnoreCase("Active")){
+            accountToUpdateStatus.setAccountStatus("Inactive");
             return accountRepository.save(accountToUpdateStatus);
         } else {    
             return null;

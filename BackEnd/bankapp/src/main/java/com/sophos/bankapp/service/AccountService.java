@@ -12,6 +12,6 @@ public interface AccountService {
     public Optional<Account> getAccountById(int id);
     public boolean deleteAccountById(int id);
 
-    public Account activeInactiveAccount(int id, Account account);
+    public Account activeInactiveAccount(int id);
     
 }

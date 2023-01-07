@@ -2,10 +2,15 @@ package com.sophos.bankapp.entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,14 +21,20 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String accountNumber; // Vincular con el accounNumber de Account
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account linkedAccount; 
+
+    private String accountToTransfer;
+
+
     private LocalDate transactionDate;
     private String transactionType;
     private String description;
     private Number transactionValue;
     private String movementType;
-    private Number balance; // De la clase account
-    private Number availableBalance; // De la clase Account 
 
 
     public Transaction() {
@@ -37,16 +48,6 @@ public class Transaction {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
 
@@ -100,24 +101,24 @@ public class Transaction {
     }
 
 
-    public Number getBalance() {
-        return balance;
+    public Account getLinkedAccount() {
+        return linkedAccount;
     }
 
 
-    public void setBalance(Number balance) {
-        this.balance = balance;
+    public void setLinkedAccount(Account linkedAccount) {
+        this.linkedAccount = linkedAccount;
+    }
+
+    public String getAccountToTransfer() {
+        return accountToTransfer;
     }
 
 
-    public Number getAvailableBalance() {
-        return availableBalance;
+    public void setAccountToTransfer(String accountToTransfer) {
+        this.accountToTransfer = accountToTransfer;
     }
 
 
-    public void setAvailableBalance(Number availableBalance) {
-        this.availableBalance = availableBalance;
-    }
 
-    
 }

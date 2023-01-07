@@ -11,5 +11,10 @@ public interface TransactionService {
     public List<Transaction> getAllTransactions();
     public Optional<Transaction> getTransactionById(int id);
     public boolean deleteTransactionById(int id);
+
+    public Transaction makeConsignment(int accountId, Transaction consignment);
+    public Transaction makeWithdrawal(int accountId, Transaction withdrawal);
+
+    public Transaction makeTransfer(int accountId,  Transaction transfer); // String accountToTransfer
     
 }

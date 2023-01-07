@@ -1,6 +1,7 @@
 package com.sophos.bankapp.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -37,7 +39,13 @@ public class Account {
     private String creationUser;
     private LocalDate updateDate;
     private String updateUser;
+
+    //@JsonIgnore
+    @OneToMany(mappedBy = "linkedAccount")
+    private List<Transaction> transactionsList;
     
+    
+
     public Account() {
     }
 
@@ -135,6 +143,14 @@ public class Account {
 
     public void setAccountHolder(Client accountHolder) {
         this.accountHolder = accountHolder;
+    }
+
+    public List<Transaction> getTransactionsList() {
+        return transactionsList;
+    }
+
+    public void setTransactionsList(List<Transaction> transactionsList) {
+        this.transactionsList = transactionsList;
     }
 
 }

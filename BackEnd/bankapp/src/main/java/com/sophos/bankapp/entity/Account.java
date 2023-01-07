@@ -40,7 +40,7 @@ public class Account {
     private LocalDate updateDate;
     private String updateUser;
 
-    //@JsonIgnore
+    
     @OneToMany(mappedBy = "linkedAccount")
     private List<Transaction> transactionsList;
     

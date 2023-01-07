@@ -3,7 +3,6 @@ package com.sophos.bankapp.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,9 +31,8 @@ public class Client {
     private LocalDate updateDate;
     private String updateUser;
     
-    //@JsonIgnore
+    
     @OneToMany(mappedBy = "accountHolder")
-    // @JoinColumn(name = "account_id", referencedColumnName = "id")
     private List<Account> accountsList;
 
     

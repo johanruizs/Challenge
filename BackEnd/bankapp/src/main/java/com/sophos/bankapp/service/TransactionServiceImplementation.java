@@ -89,6 +89,7 @@ public class TransactionServiceImplementation implements TransactionService {
                 withdrawal.setTransactionDate(LocalDate.now());
                 withdrawal.setMovementType("Debit");
                 withdrawal.setTransactionType("Withdraw");
+                withdrawal.setLinkedAccount(accountToWithdrawal);
 
                 return transactionRepository.save(withdrawal);
 

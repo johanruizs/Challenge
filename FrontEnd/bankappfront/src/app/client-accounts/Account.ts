@@ -1,3 +1,5 @@
+import { Transaction } from "../account-transactions/transaction"
+
 export interface Account {
     id: number,
     accountType: String,
@@ -9,5 +11,6 @@ export interface Account {
     creationDate: Date
     creationUser: String,
     updateDate: Date,
-    updateUser: String
+    updateUser: String,
+    transactionsList: Transaction[]
 }

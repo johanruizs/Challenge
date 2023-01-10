@@ -32,7 +32,7 @@ public class Client {
     private String updateUser;
     
     
-    @OneToMany(mappedBy = "accountHolder")
+    @OneToMany(mappedBy = "accountHolder", orphanRemoval = true)
     private List<Account> accountsList;
 
     

@@ -1,0 +1,41 @@
+.check-boxes {
+    margin: 12px 0;
+}
+  
+.boxes-margin {
+    margin: 4px 2px 4px 50px;
+}
+
+.headerTransactions {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.transactionButton {
+    margin: 10px; 
+}
+
+.transactionContainer {
+
+    display: flex;
+    place-items: center;
+
+}
+
+.statusContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.activeButton {
+    margin-left: 30px;
+}
+
+.cancelButton {
+    margin-left: 10px;
+}
+
+

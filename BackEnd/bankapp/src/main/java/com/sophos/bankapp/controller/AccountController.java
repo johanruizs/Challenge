@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sophos.bankapp.entity.Account;
-import com.sophos.bankapp.entity.Client;
 import com.sophos.bankapp.repository.AccountRepository;
 import com.sophos.bankapp.repository.ClientRepository;
 import com.sophos.bankapp.service.AccountService;;
@@ -77,18 +76,15 @@ public class AccountController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);	
         }    
-
 	}
 
-    @PutMapping("/{accountId}/accountHolder/{clientId}") // esto lo meti en el create
-    Account assignClientToAccount(
-            @PathVariable int accountId,
-            @PathVariable int clientId
-    ) {
-        Account account = accountRepository.findById(accountId).get();
-        Client client = clientRepository.findById(clientId).get();
-        account.setAccountHolder(client);
-        return accountRepository.save(account);
-    }
-    
+    @PutMapping("/cancel/{id}")
+    public ResponseEntity<Account> cancelAccount(@PathVariable("id") int id) {
+        if (accountService.cancelAccount(id) != null){
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);	
+        }
+
+    }    
 }

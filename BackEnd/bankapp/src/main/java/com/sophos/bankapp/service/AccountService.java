@@ -13,5 +13,6 @@ public interface AccountService {
     public boolean deleteAccountById(int id);
 
     public Account activeInactiveAccount(int id);
+    public Account cancelAccount(int id);
     
 }

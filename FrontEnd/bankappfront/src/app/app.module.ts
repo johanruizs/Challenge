@@ -8,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { ClientAccountsComponent } from './client-accounts/client-accounts.component';
 import { ClientsPageComponent } from './clients-page/clients-page.component';
 import { RouterModule } from '@angular/router';
+import { AccountTransactionsComponent } from './account-transactions/account-transactions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientAccountsComponent,
-    ClientsPageComponent
+    ClientsPageComponent,
+    AccountTransactionsComponent
   ],
   imports: [
     BrowserModule,

@@ -59,11 +59,12 @@ export class ClientAccountsComponent implements OnInit{
       {
         next:(response: Account) => {
           console.log(response);
+          alert('Account Created')
           location.reload();
           addForm.reset();
         },
-        error:(error: HttpErrorResponse) => {
-          alert(error.message);
+        error:() => {
+          alert('Please try again');
           addForm.reset();
         }
       });

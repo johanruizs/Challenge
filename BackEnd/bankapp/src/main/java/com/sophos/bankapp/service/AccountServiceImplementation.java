@@ -91,5 +91,20 @@ public class AccountServiceImplementation implements AccountService {
         }
 
     }
+
+    @Override
+    public Account cancelAccount(int id){
+
+        Account accountToCancel = accountRepository.findById(id).get();
+
+        if(accountToCancel.getAvailableBalance() == null || (accountToCancel.getAvailableBalance().floatValue() >= 0 && accountToCancel.getAvailableBalance().floatValue() < 1)) {
+            accountToCancel.setAccountStatus("Cancelled");
+            return accountRepository.save(accountToCancel);
+        } else {
+            System.out.println("This account can not be cancelled");
+            return null;
+        }
+
+    }
     
 }

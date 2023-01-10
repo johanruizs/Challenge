@@ -38,11 +38,12 @@ export class ClientsPageComponent implements OnInit{
       {
         next:(response: Client) => {
           console.log(response);
+          alert('Client Created')
           this.getClients();
           addForm.reset();
         },
-        error:(error: HttpErrorResponse) => {
-          alert(error.message);
+        error:() => { 
+          alert('Client already exists or It is underage.');
           addForm.reset();
         }
       });
@@ -53,10 +54,11 @@ export class ClientsPageComponent implements OnInit{
     this.clientService.editClient(client).subscribe({
       next:(response: Client) => {
         console.log(response);
+        alert('Client Updated')
         this.getClients();
       },
-      error:(error: HttpErrorResponse) => {
-        alert(error.message);
+      error:() => {
+        alert('Client must not be underage or Number Id already exists')
       }
     });
   }
@@ -65,10 +67,11 @@ export class ClientsPageComponent implements OnInit{
     this.clientService.deleteClient(clientId).subscribe({
       next:(response: void) => {
         console.log(response);
+        alert('Client Deleted')
         this.getClients();
       },
-      error:(error: HttpErrorResponse) => {
-        alert(error.message);
+      error:() => {
+        alert('This client can not be deleted ... Check the status of the accounts!')
       }
     });
   }

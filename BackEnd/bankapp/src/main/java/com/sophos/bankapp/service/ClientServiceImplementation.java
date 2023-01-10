@@ -5,12 +5,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
+import com.sophos.bankapp.entity.Account;
 import com.sophos.bankapp.entity.Client;
+import com.sophos.bankapp.repository.AccountRepository;
 import com.sophos.bankapp.repository.ClientRepository;
 
 @Service
@@ -18,6 +21,9 @@ public class ClientServiceImplementation implements ClientService {
 
     @Autowired
     ClientRepository clientRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
 
     @Override
     public Client createClient(Client client) {
@@ -47,12 +53,21 @@ public class ClientServiceImplementation implements ClientService {
    
     @Override                                                      
     public boolean deleteClientById(int id) {
-        
 
-        return getClientById(id).map(client -> {
+        Client clientToDelete = clientRepository.findById(id).get();
+
+        List <Account> clientAccounts = clientToDelete.getAccounts();
+
+        List <Account> cancelledAccounts = clientAccounts.stream().filter((p) -> p.getAccountStatus().equalsIgnoreCase("Cancelled")).collect(Collectors.toList());
+
+        if(clientAccounts.size() == cancelledAccounts.size()){
             clientRepository.deleteById(id);
             return true;
-        }).orElse(false);
+        } else {
+            System.out.println("Client can not be deleted");
+            return false;
+        }
+        
     }
 
 
@@ -124,7 +139,8 @@ public class ClientServiceImplementation implements ClientService {
 
         AgeCalculator ageCalculator = new AgeCalculator();
         int age = ageCalculator.calculateAge(existingClient.getBirthDate(), LocalDate.now());
-        if (age>=18) {
+        Client newClientId = clientRepository.findByNumberId(existingClient.getNumberId());
+        if (age>=18 && newClientId == null) {
             return clientRepository.save(existingClient);
         } 
         return null;
@@ -132,3 +148,4 @@ public class ClientServiceImplementation implements ClientService {
     }
 
 }
+

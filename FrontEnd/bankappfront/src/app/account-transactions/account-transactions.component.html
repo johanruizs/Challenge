@@ -1,0 +1,160 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: indigo;">
+    <a class="navbar-brand" style="color:white;">bank app</a>
+    <button class="navbar-toggler" style="background-color: rgb(188, 138, 223);" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <a routerLink="" >
+            <button class="nav-link border rounded p-1 px-4 text-dark" style="background-color: rgb(188, 138, 223);">Back</button>
+        </a>
+    </div>
+</nav>
+<div class="content-box" id="main-container">
+    <div class="headerTransactions">
+        <div class="border rounded p-1">
+            <h3>Account Number: {{account.accountNumber}}</h3> 
+            <h6>Account Type: {{account.accountType}}</h6>
+            <h6>Balance: ${{account.balance}}</h6>
+            <h6>Available Balance: ${{account.availableBalance}}</h6>
+            <div class="statusContainer">
+                <h6>Account Status: {{account.accountStatus}}</h6>
+                <button *ngIf="(account.accountStatus === 'Active')" class="activeButton text-light btn btn-secondary tooltips" (click)="onActiveInactiveAccount(account.id, account)">Inactivate</button>
+                <button *ngIf="(account.accountStatus === null || account.accountStatus === 'Inactive')" class="activeButton text-light btn btn-success tooltips" (click)="onActiveInactiveAccount(account.id, account)">Activate</button>
+                <button *ngIf="(account.accountStatus === null || account.accountStatus === 'Inactive' || account.accountStatus === 'Active')"class="cancelButton text-light btn btn-danger tooltips" (click)="onCancelAccount(account.id, account)">Cancel</button>
+            </div>   
+        </div>
+            
+        <div class="transactionContainer">
+            <div>
+                <a class=" transactionButton text-light btn bg-success tooltips" (click)="onOpenModal('consignment')">Consignment<span class="sr-only">(current)</span></a>
+                <a class=" transactionButton text-light btn bg-danger tooltips" (click)="onOpenModal('withdrawal')">Withdrawal<span class="sr-only">(current)</span></a>
+                <a class="transactionButton text-dark btn bg-warning tooltips" (click)="onOpenModal('transfer')" >Transfer<span class="sr-only">(current)</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accounts card Comentario -->
+    <div class="card mb-4">
+        <div class="card-header bg-success bg-gradient font-weight-bold">Transactions</div>
+        <div class="card-body p-0">
+            <!-- Accounts table Comentario -->
+            <div class="table-responsive table-billing-history">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="border-gray-200" scope="col">Transaction Date</th>
+                            <th class="border-gray-200" scope="col">Transaction Type</th>
+                            <th class="border-gray-200" scope="col">Description</th>
+                            <th class="border-gray-200" scope="col">Value</th>
+                            <th class="border-gray-200" scope="col">Movement Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor= "let transaction of account.transactionsList">
+                            <td>{{transaction.transactionDate}}</td>
+                            <td>{{transaction.transactionType}}</td>
+                            <td>{{transaction.description}}</td>
+                            <td>${{transaction.transactionValue}}</td>
+                            <td>{{transaction.movementType}}</td>
+                        </tr>    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Consignment Modal -->
+<div class="modal fade" id="addConsignmentModal" tabindex="-1" role="dialog" aria-labelledby="addConsignmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="addConsignmentModalLabel">Make a Consignment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form #consignmentForm="ngForm" (ngSubmit)="onAddConsignment(consignmentForm)">
+                <div class="form-group">
+                    <label for="transactionValue">Transactions Value</label>
+                    <input type="number" ngModel name="transactionValue" class="form-control" id="transactionValue" placeholder="Among to consign..." required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" ngModel name="description" class="form-control" id="description" placeholder="Add a description...">
+                </div>
+                <div class="modal-footer">
+                   <button type="button" id="add-consignment-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <button [disabled]="consignmentForm.invalid" type="submit" class="btn btn-primary" >Consign</button>
+                </div>
+            </form>
+         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Withdrawal Modal -->
+<div class="modal fade" id="addWithdrawalModal" tabindex="-1" role="dialog" aria-labelledby="addWithdrawalModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="addWithdrawalModalLabel">Make a Withdrawal</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form #withdrawalForm="ngForm" (ngSubmit)="onAddWithdrawal(withdrawalForm)">
+                <div class="form-group">
+                    <label for="transactionValue">Transactions Value</label>
+                    <input type="number" ngModel name="transactionValue" class="form-control" id="transactionValue" placeholder="Among to withdraw..." required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" ngModel name="description" class="form-control" id="description" placeholder="Add a description...">
+                </div>
+                <div class="modal-footer">
+                   <button type="button" id="add-withdrawal-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <button [disabled]="withdrawalForm.invalid" type="submit" class="btn btn-primary" >Withdraw</button>
+                </div>
+            </form>
+         </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Add Transfer Modal -->
+<div class="modal fade" id="addTransferModal" tabindex="-1" role="dialog" aria-labelledby="addTransferModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="addTransferModalLabel">Make a Transfer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form #transferForm="ngForm" (ngSubmit)="onAddTransfer(transferForm)">
+                <div class="form-group">
+                    <label for="accountToTransfer">Account to Transfer</label>
+                    <input type="text" ngModel name="accountToTransfer" class="form-control" id="accountToTransfer" placeholder="Receiver account..." required>
+                </div>
+                <div class="form-group">
+                    <label for="transactionValue">Transactions Value</label>
+                    <input type="number" ngModel name="transactionValue" class="form-control" id="transactionValue" placeholder="Among to transfer..." required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" ngModel name="description" class="form-control" id="description" placeholder="Add a description...">
+                </div>
+                <div class="modal-footer">
+                   <button type="button" id="add-transfer-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <button [disabled]="transferForm.invalid" type="submit" class="btn btn-primary" >Transfer</button>
+                </div>
+            </form>
+         </div>
+      </div>
+    </div>
+  </div>

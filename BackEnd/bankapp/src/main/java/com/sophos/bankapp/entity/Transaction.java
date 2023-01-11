@@ -29,7 +29,6 @@ public class Transaction {
 
     private String accountToTransfer;
 
-
     private LocalDate transactionDate;
     private String transactionType;
     private String description;

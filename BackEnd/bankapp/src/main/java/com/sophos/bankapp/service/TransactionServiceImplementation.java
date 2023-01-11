@@ -51,12 +51,8 @@ public class TransactionServiceImplementation implements TransactionService {
 
         if (accountToConsignment.getAccountStatus() != null ){
             accountToConsignment.setBalance(accountToConsignment.getBalance().floatValue()  + consignment.getTransactionValue().floatValue());
-            if (accountToConsignment.getTaxFree()){
-                accountToConsignment.setAvailableBalance(accountToConsignment.getBalance());
-            } else {
-                accountToConsignment.setAvailableBalance(996);
-            }
-
+            accountToConsignment.setAvailableBalance(accountToConsignment.getAvailableBalance().floatValue()  + consignment.getTransactionValue().floatValue());
+           
             consignment.setTransactionDate(LocalDate.now());
             consignment.setMovementType("Credit");
             consignment.setTransactionType("Consignment");
@@ -81,10 +77,10 @@ public class TransactionServiceImplementation implements TransactionService {
 
                 accountToWithdrawal.setBalance(accountToWithdrawal.getBalance().floatValue() - withdrawal.getTransactionValue().floatValue());
                 if (accountToWithdrawal.getTaxFree()){
-                    accountToWithdrawal.setAvailableBalance(accountToWithdrawal.getBalance());
-                } // } else {
-                //     accountToConsignment.setAvailableBalance(996);
-                // }
+                    accountToWithdrawal.setAvailableBalance(accountToWithdrawal.getAvailableBalance().floatValue() - withdrawal.getTransactionValue().floatValue());
+                } else {
+                    accountToWithdrawal.setAvailableBalance((accountToWithdrawal.getAvailableBalance().floatValue() - withdrawal.getTransactionValue().floatValue()) - (withdrawal.getTransactionValue().floatValue() * 0.004));
+                }
 
                 withdrawal.setTransactionDate(LocalDate.now());
                 withdrawal.setMovementType("Debit");
@@ -98,10 +94,10 @@ public class TransactionServiceImplementation implements TransactionService {
 
                 accountToWithdrawal.setBalance(accountToWithdrawal.getBalance().floatValue() - withdrawal.getTransactionValue().floatValue());
                 if (accountToWithdrawal.getTaxFree()){
-                    accountToWithdrawal.setAvailableBalance(accountToWithdrawal.getBalance());
-                } // } else {
-                //     accountToConsignment.setAvailableBalance(996);
-                // }
+                    accountToWithdrawal.setAvailableBalance(accountToWithdrawal.getAvailableBalance().floatValue() - withdrawal.getTransactionValue().floatValue());
+                } else {
+                    accountToWithdrawal.setAvailableBalance((accountToWithdrawal.getAvailableBalance().floatValue() - withdrawal.getTransactionValue().floatValue()) - (withdrawal.getTransactionValue().floatValue() * 0.004));
+                }
 
                 withdrawal.setTransactionDate(LocalDate.now());
                 withdrawal.setMovementType("Debit");
@@ -130,10 +126,10 @@ public class TransactionServiceImplementation implements TransactionService {
                 // sender Account
                 senderAccount.setBalance(senderAccount.getBalance().floatValue() - transfer.getTransactionValue().floatValue());
                 if (senderAccount.getTaxFree()){
-                    senderAccount.setAvailableBalance(senderAccount.getBalance());
-                } // } else {
-                //     accountToConsignment.setAvailableBalance(996);
-                // }
+                    senderAccount.setAvailableBalance(senderAccount.getAvailableBalance().floatValue() - transfer.getTransactionValue().floatValue());
+                } else {
+                    senderAccount.setAvailableBalance((senderAccount.getAvailableBalance().floatValue() - transfer.getTransactionValue().floatValue()) - (transfer.getTransactionValue().floatValue() * 0.004));
+                }
 
                 transfer.setTransactionDate(LocalDate.now());
                 transfer.setMovementType("Debit");
@@ -142,10 +138,8 @@ public class TransactionServiceImplementation implements TransactionService {
 
                 // receiver account
                 receiverAccount.setBalance(receiverAccount.getBalance().floatValue() + transfer.getTransactionValue().floatValue());
-                if (receiverAccount.getTaxFree()){
-                    receiverAccount.setAvailableBalance(receiverAccount.getBalance());
-                }
-
+                receiverAccount.setAvailableBalance(receiverAccount.getAvailableBalance().floatValue() + transfer.getTransactionValue().floatValue());
+                
                 Transaction receiverTransfer = new Transaction();
                 receiverTransfer.setLinkedAccount(receiverAccount);
                 receiverTransfer.setMovementType("Credit");
@@ -165,10 +159,10 @@ public class TransactionServiceImplementation implements TransactionService {
                 // sender Account
                 senderAccount.setBalance(senderAccount.getBalance().floatValue() - transfer.getTransactionValue().floatValue());
                 if (senderAccount.getTaxFree()){
-                    senderAccount.setAvailableBalance(senderAccount.getBalance());
-                } // } else {
-                //     accountToConsignment.setAvailableBalance(996);
-                // }
+                    senderAccount.setAvailableBalance(senderAccount.getAvailableBalance().floatValue() - transfer.getTransactionValue().floatValue());
+                } else {
+                    senderAccount.setAvailableBalance((senderAccount.getAvailableBalance().floatValue() - transfer.getTransactionValue().floatValue()) - (transfer.getTransactionValue().floatValue() * 0.004));
+                }
 
                 transfer.setTransactionDate(LocalDate.now());
                 transfer.setMovementType("Debit");
@@ -177,10 +171,8 @@ public class TransactionServiceImplementation implements TransactionService {
 
                 // receiver account
                 receiverAccount.setBalance(receiverAccount.getBalance().floatValue() + transfer.getTransactionValue().floatValue());
-                if (receiverAccount.getTaxFree()){
-                    receiverAccount.setAvailableBalance(receiverAccount.getBalance());
-                }
-
+                receiverAccount.setAvailableBalance(receiverAccount.getAvailableBalance().floatValue() + transfer.getTransactionValue().floatValue());
+                
                 Transaction receiverTransfer = new Transaction();
                 receiverTransfer.setLinkedAccount(receiverAccount);
                 receiverTransfer.setMovementType("Credit");

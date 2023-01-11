@@ -44,6 +44,8 @@ public class AccountServiceImplementation implements AccountService {
                     account.setCreationUser("admin");
                     account.setUpdateUser("admin");
                     account.setAccountHolder(client);
+                    account.setBalance(0);
+                    account.setAvailableBalance(0);
                     if (account.getAccountType().equalsIgnoreCase("Saving")){
                         account.setAccountStatus("Active");
                     }

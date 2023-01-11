@@ -15,8 +15,8 @@
         <div class="border rounded p-1">
             <h3>Account Number: {{account.accountNumber}}</h3> 
             <h6>Account Type: {{account.accountType}}</h6>
-            <h6>Balance: ${{account.balance}}</h6>
-            <h6>Available Balance: ${{account.availableBalance}}</h6>
+            <h6>Balance: $ {{account.balance | number: '1.2'}}</h6>
+            <h6>Available Balance: $ {{account.availableBalance | number: '1.2'}}</h6>
             <div class="statusContainer">
                 <h6>Account Status: {{account.accountStatus}}</h6>
                 <button *ngIf="(account.accountStatus === 'Active')" class="activeButton text-light btn btn-secondary tooltips" (click)="onActiveInactiveAccount(account.id, account)">Inactivate</button>
@@ -34,13 +34,13 @@
         </div>
     </div>
 
-    <!-- Accounts card Comentario -->
+    <!-- Accounts card  -->
     <div class="card mb-4">
         <div class="card-header bg-success bg-gradient font-weight-bold">Transactions</div>
         <div class="card-body p-0">
-            <!-- Accounts table Comentario -->
+            <!-- Accounts table  -->
             <div class="table-responsive table-billing-history">
-                <table class="table mb-0">
+                <table class="table mb-0" >
                     <thead>
                         <tr>
                             <th class="border-gray-200" scope="col">Transaction Date</th>
@@ -55,7 +55,7 @@
                             <td>{{transaction.transactionDate}}</td>
                             <td>{{transaction.transactionType}}</td>
                             <td>{{transaction.description}}</td>
-                            <td>${{transaction.transactionValue}}</td>
+                            <td>$ {{transaction.transactionValue | number: '1.2'}}</td>
                             <td>{{transaction.movementType}}</td>
                         </tr>    
                     </tbody>
@@ -78,8 +78,8 @@
          <div class="modal-body">
             <form #consignmentForm="ngForm" (ngSubmit)="onAddConsignment(consignmentForm)">
                 <div class="form-group">
-                    <label for="transactionValue">Transactions Value</label>
-                    <input type="number" ngModel name="transactionValue" class="form-control" id="transactionValue" placeholder="Among to consign..." required>
+                    <label for="transactionValue">Transaction Value</label>
+                    <input type="number" ngModel name="transactionValue" class="form-control" id="transactionValue" placeholder="Amount to consign..." required>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -108,8 +108,8 @@
          <div class="modal-body">
             <form #withdrawalForm="ngForm" (ngSubmit)="onAddWithdrawal(withdrawalForm)">
                 <div class="form-group">
-                    <label for="transactionValue">Transactions Value</label>
-                    <input type="number" ngModel name="transactionValue" class="form-control" id="transactionValue" placeholder="Among to withdraw..." required>
+                    <label for="transactionValue">Transaction Value</label>
+                    <input type="number" ngModel name="transactionValue" class="form-control" id="transactionValue" placeholder="Amount to withdraw..." required>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -142,8 +142,8 @@
                     <input type="text" ngModel name="accountToTransfer" class="form-control" id="accountToTransfer" placeholder="Receiver account..." required>
                 </div>
                 <div class="form-group">
-                    <label for="transactionValue">Transactions Value</label>
-                    <input type="number" ngModel name="transactionValue" class="form-control" id="transactionValue" placeholder="Among to transfer..." required>
+                    <label for="transactionValue">Transaction Value</label>
+                    <input type="number" ngModel name="transactionValue" class="form-control" id="transactionValue" placeholder="Amount to transfer..." required>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>

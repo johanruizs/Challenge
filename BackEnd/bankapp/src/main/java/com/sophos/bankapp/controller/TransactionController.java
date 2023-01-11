@@ -67,9 +67,9 @@ public class TransactionController {
     }
 
     @PostMapping("/transfer/{accountId}")
-    public ResponseEntity<Transaction> makeTransfer(@PathVariable int accountId,  @RequestBody Transaction transfer){ //@PathVariable String accountToTransfer,
+    public ResponseEntity<Transaction> makeTransfer(@PathVariable int accountId,  @RequestBody Transaction transfer){ 
 
-        if (transactionService.makeTransfer(accountId, transfer) != null){ //accountToTransfer, 
+        if (transactionService.makeTransfer(accountId, transfer) != null){ 
             return new ResponseEntity<>(transfer, HttpStatus.CREATED);
         } else {
             System.out.println("Account to transfer does not exits");

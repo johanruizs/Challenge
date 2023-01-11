@@ -9,6 +9,9 @@
         <li class="nav-item active">
            <a class="nav-link border border-primary rounded p-1 bg-primary text-white" (click)="onOpenModal('add')">Add Client <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item active">
+            <a routerLink = "/developer" class="nav-link border border-primary rounded float-center p-1 bg-primary text-white">Info <span class="sr-only">(current)</span></a>
+         </li>
      </ul>
      <form class="form-inline my-2 my-lg-0">
         <input type="search" (ngModelChange)="searchClient(key.value)" #key="ngModel" ngModel
@@ -76,7 +79,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="numberId">ID Number</label>
+            <label for="numberId">Number Id</label>
             <input type="text" ngModel name="numberId" pattern="[a-zA-Z0-9.-_]{2,}" class="form-control" id="numberId" placeholder="Id Number" required>
           </div>
           <div class="form-group">
@@ -126,7 +129,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="numberId">ID Number</label>
+                <label for="numberId">Number Id</label>
                 <input type="text" ngModel="{{updateClient?.numberId}}" name="numberId" pattern="[a-zA-Z0-9.-_]{2,}" class="form-control" id="numberId" placeholder="Id Number" required>
               </div>
               <div class="form-group">

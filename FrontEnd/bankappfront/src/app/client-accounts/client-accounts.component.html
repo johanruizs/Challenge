@@ -39,8 +39,8 @@
                         <tr *ngFor= "let account of client.accounts">
                             <td>{{account.accountType}}</td>
                             <td>{{account.accountNumber}}</td>
-                            <td>${{account.balance}}</td>
-                            <td>${{account.availableBalance}}</td>
+                            <td>$ {{account.balance | number: '1.2'}}</td>
+                            <td>$ {{account.availableBalance | number: '1.2'}}</td>
                             <td><a routerLink = "/transactions/{{account.id}}" class="text-dark btn bg-success tooltips">Statement</a></td>
                         </tr>    
                     </tbody>

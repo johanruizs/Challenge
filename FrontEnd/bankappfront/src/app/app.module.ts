@@ -9,13 +9,15 @@ import { ClientAccountsComponent } from './client-accounts/client-accounts.compo
 import { ClientsPageComponent } from './clients-page/clients-page.component';
 import { RouterModule } from '@angular/router';
 import { AccountTransactionsComponent } from './account-transactions/account-transactions.component';
+import { DeveloperProfileComponent } from './developer-profile/developer-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientAccountsComponent,
     ClientsPageComponent,
-    AccountTransactionsComponent
+    AccountTransactionsComponent,
+    DeveloperProfileComponent
   ],
   imports: [
     BrowserModule,

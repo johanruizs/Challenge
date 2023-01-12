@@ -41,7 +41,7 @@ public class Account {
     private String updateUser;
 
     
-    @OneToMany(mappedBy = "linkedAccount")
+    @OneToMany(mappedBy = "linkedAccount", orphanRemoval = true)
     private List<Transaction> transactionsList;
     
     
